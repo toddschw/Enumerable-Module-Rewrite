@@ -3,4 +3,12 @@ require_relative 'my_enumerable'
 
 Array.include MyEnumerable
 
-puts [1,2,3].my_map(:even?)
+p [1,2,3].my_map { |x| x * 50 }
+
+puts
+
+p ['a','b','c'].my_map(:upcase)
+
+puts
+
+p ['A','B','C'].my_map(&:downcase)
