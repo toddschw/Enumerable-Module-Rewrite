@@ -96,9 +96,31 @@ module MyEnumerable
     end
     acc
   end
+
+  # select
+  # ********************************************************
+  # call it 3 ways
+  # Way #1 [1,2,3,4,5].select(:even?)
+  # Way #1 [1,2,3,4,5].select(&:even?)
+  # Way #1 [1,2,3,4,5].select { |x| x.even? }
+
+  def my_select(operator = nil, &block)
+    # Keep the proc Ruby creates if a block is given
+    # If no block is given, create a proc manually
+    block = block || Proc.new { |value| value.send(operator) }
+
+    result = []
+    self.each do |value|
+      result.push value if block.call(value)
+    end
+    result
+  end
+
 end
 
 Array.include MyEnumerable
+
+
 
 
 
