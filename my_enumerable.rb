@@ -97,6 +97,9 @@ module MyEnumerable
     acc
   end
 
+
+
+
   # select
   # ********************************************************
   # call it 3 ways
@@ -116,6 +119,27 @@ module MyEnumerable
     result
   end
 
+
+
+
+  # reject
+  # ********************************************************
+  # call it 3 ways
+  # Way #1 [1,2,3,4,5].reject(:even?)
+  # Way #1 [1,2,3,4,5].reject(&:even?)
+  # Way #1 [1,2,3,4,5].reject{ |x| x.even? }
+
+  def my_reject(operator = nil, &block)
+    # Keep the proc Ruby creates if a block is given
+    # If no block is given, create a proc manually
+    block = block || Proc.new { |value| value.send(operator) }
+
+    result = []
+    self.each do |value|
+      result.push value unless block.call(value)
+    end
+    result
+  end
 end
 
 Array.include MyEnumerable
