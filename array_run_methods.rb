@@ -34,5 +34,11 @@ p [1,2,3,4,5,6].my_count
 p [nil,false,3,4,5,6,7].my_count
 p [false,2,nil,4,5,6,7,8].my_count(4)
 p ['b',2,'b',4,5,6,7,9].my_count { |x| x == 'b' }
+p ['b',2,'b',4,5,6,7,9].my_count{ |x| x % 2 == 0 }
+
+puts "\nManual Test of #my_detect"
+p [1,2,3,4,5].my_detect { |x| x % 9 == 0 }
+p (1..100).to_a.my_detect { |i| i % 5 == 0 and i % 7 == 0 }
+
 
 

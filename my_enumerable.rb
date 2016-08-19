@@ -194,6 +194,23 @@ module MyEnumerable
 
     result
   end
+
+  # detect, find
+  # ********************************************************
+  # call it 1 way
+  # Way #1 [1,2,3,4,5].my_detect { |x| x%5==0 }
+  def my_detect(&block)
+    counter, found = 0, false
+    self.each do |value|
+      if block.call(value)
+        return self[counter]
+      else
+        counter +=1
+      end
+    end
+    nil
+  end
+
 end
 
 
