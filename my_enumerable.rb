@@ -1,16 +1,63 @@
 # Todd Schwartzfarb
 
-# Rewrite the Enumerable Module
+# Recreate the Enumerable Module
 # or at least a bunch of its methods
 # as a coding exercise
 # Inspired by this post:
 # https://blog.codeship.com/the-enumerable-module/
 
+# Enumerable Methods to recreate:
+# ________________________________
+# all
+# any
+# chunk
+# chunk_while
+# collect
+# collect_concat
+# count
+# cycle
+# detect
+# drop
+# drop_while
+# each_cons
+# each_entry
+# each_slice
+# each_with_index
+# each_with_object
+# entries
+# find
+# find_all
+# find_index
+# first
+# flat_map
+# group_by
+# include?
+# inject
+# lazy
+# map
+# max
+# max_by
+# member?
+# none?
+# partition
+# reduce
+# reject
+# reverse_each
+# select
+# slice_after
+# slice_before
+# slice_when
+# take
+# take_while
+# to_a
+# to_h
+# zip
+
 
 module MyEnumerable
 
-  # RECREATE THE MAP,COLLECT METHOD
-
+  # map, collect
+  # ********************************************************
   # we want to be able to call it 3 ways
   # Way #1: ['a','b','c'].my_map(:upcase)
   # Way #2: ['a','b','c'].my_map { |i| i.upcase }
@@ -28,4 +75,30 @@ module MyEnumerable
     end
     result
   end
+
+
+
+
+  # reduce, inject
+  # ********************************************************
+  # we want to be able to call it 3 ways
+  # Way #1:  [1,2,3,4,5].my_reduce(100,:+)
+  # Way #2  [1,2,3,4,5].my_reduce { |sum, n| sum + n }
+  # Way #3  [1,2,3,4,5].my_reduce(100) { |sum, n| sum + n }
+
+  def my_reduce(acc=0, operator=nil, &block)
+    # Keep the proc Ruby creates if a block is given
+    # If no block is given, create a proc manually
+    block = block || Proc.new { |acc, value| acc.send(operator, value) }
+
+    self.each do |value|
+      acc = block.call(acc, value )
+    end
+    acc
+  end
 end
+
+Array.include MyEnumerable
+
+
+
