@@ -24,6 +24,15 @@ p [1,2,3,4,5,6,7,8,9,10].my_reject(&:even?)
 p [1,2,3,4,5,6,7,8,9,10].my_reject { |value| value % 3 == 0 }
 
 puts "\nManual Test of #my_all"
-p [1,2,3,4,5,6,7,8,9,10].my_all { |x| x > 0 }
+p [1,2,3,4,5,6,7,8,9,10].my_all { |x| x > 4 }
+
+puts "\nManual Test of #my_any"
+p [1,2,3,4,5,6,7,8,9,10].my_any { |x| x > 9 }
+
+puts "\nManual Test of #my_count"
+p [1,2,3,4,5,6].my_count
+p [nil,false,3,4,5,6,7].my_count
+p [false,2,nil,4,5,6,7,8].my_count(4)
+p ['b',2,'b',4,5,6,7,9].my_count { |x| x == 'b' }
 
 

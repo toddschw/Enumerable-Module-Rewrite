@@ -77,8 +77,6 @@ module MyEnumerable
   end
 
 
-
-
   # reduce, inject
   # ********************************************************
   # we want to be able to call it 3 ways
@@ -98,14 +96,12 @@ module MyEnumerable
   end
 
 
-
-
   # select
   # ********************************************************
   # call it 3 ways
-  # Way #1 [1,2,3,4,5].select(:even?)
-  # Way #1 [1,2,3,4,5].select(&:even?)
-  # Way #1 [1,2,3,4,5].select { |x| x.even? }
+  # Way #1 [1,2,3,4,5].my_select(:even?)
+  # Way #1 [1,2,3,4,5].my_select(&:even?)
+  # Way #1 [1,2,3,4,5].my_select { |x| x.even? }
 
   def my_select(operator = nil, &block)
     # Keep the proc Ruby creates if a block is given
@@ -120,14 +116,12 @@ module MyEnumerable
   end
 
 
-
-
   # reject
   # ********************************************************
   # call it 3 ways
-  # Way #1 [1,2,3,4,5].reject(:even?)
-  # Way #1 [1,2,3,4,5].reject(&:even?)
-  # Way #1 [1,2,3,4,5].reject{ |x| x.even? }
+  # Way #1 [1,2,3,4,5].my_reject(:even?)
+  # Way #1 [1,2,3,4,5].my_reject(&:even?)
+  # Way #1 [1,2,3,4,5].my_reject{ |x| x.even? }
 
   def my_reject(operator = nil, &block)
     # Keep the proc Ruby creates if a block is given
@@ -142,12 +136,10 @@ module MyEnumerable
   end
 
 
-
-
   # all
   # ********************************************************
-  # call it 1 ways
-  # Way #1 [1,2,3,4,5].all { |x| x > 3 }
+  # call it 1 way
+  # Way #1 [1,2,3,4,5].my_all { |x| x > 3 }
 
   def my_all(&block)
     result = 0
@@ -158,10 +150,51 @@ module MyEnumerable
     result == self.length
   end
 
+
+  # any
+  # ********************************************************
+  # call it 1 way
+  # Way #1 [1,2,3,4,5].my_any { |x| x > 3 }
+
+  def my_any(&block)
+    result = 0
+    self.each do |value|
+      result += 1 if block.call(value)
+    end
+
+    result > 0
+  end
+
+  # count
+  # ********************************************************
+  # call it 3 ways
+  # Way #1 [1,2,3,4,5].my_count
+  # Way #2 [1,2,3,4,5].my_count(5)  #=> 1
+  # Way #3 [1,2,3,4,5].my_count { |x| x % 2 == 0 }  #=> 2
+
+  # This method doesn't work for parameters nil and false
+  def my_count(match=nil, &block)
+    # Keep the proc Ruby creates if a block is given
+    # If no block is given, create a proc manually
+    block = block || Proc.new { |value| value.object_id }
+
+    result = 0
+
+    unless match
+      self.each do |value|
+        result += 1 if block.call(value)
+      end
+    end
+
+    if match
+      self.each do |value|
+        result += 1 if value.equal?(match)
+      end
+    end
+
+    result
+  end
 end
-
-Array.include MyEnumerable
-
 
 
 
