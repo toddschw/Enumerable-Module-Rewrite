@@ -22,3 +22,8 @@ puts "\nManual Test of #my_reject"
 p [1,2,3,4,5,6,7,8,9,10].my_reject(:odd?)
 p [1,2,3,4,5,6,7,8,9,10].my_reject(&:even?)
 p [1,2,3,4,5,6,7,8,9,10].my_reject { |value| value % 3 == 0 }
+
+puts "\nManual Test of #my_all"
+p [1,2,3,4,5,6,7,8,9,10].my_all { |x| x > 0 }
+
+

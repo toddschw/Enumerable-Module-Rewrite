@@ -140,6 +140,24 @@ module MyEnumerable
     end
     result
   end
+
+
+
+
+  # all
+  # ********************************************************
+  # call it 1 ways
+  # Way #1 [1,2,3,4,5].all { |x| x > 3 }
+
+  def my_all(&block)
+    result = 0
+    self.each do |value|
+      result += 1 if block.call(value)
+    end
+
+    result == self.length
+  end
+
 end
 
 Array.include MyEnumerable
