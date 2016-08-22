@@ -226,8 +226,28 @@ module MyEnumerable
     result
   end
 
+
+  # drop_while
+  # ********************************************************
+  # call it 1 way
+  # Way #1 [1,2,3,4,5].my_while_drop { |x| x < 3 }
+
+  def my_drop_while(&block)
+    counter = 0
+    each do | value |
+      if block.call(value)
+        counter +=1
+      elsif
+        nil
+        break
+      end
+    end
+    last_index = length - 1
+    remaining_elements = last_index - counter + 1
+    slice(counter,remaining_elements)
+  end
 end
 
-
+Array.include MyEnumerable
 
 
