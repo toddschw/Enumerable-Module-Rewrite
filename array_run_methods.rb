@@ -49,6 +49,9 @@ p (1..10).to_a.my_drop(9)
 puts "\nManual Test of #my_drop_while"
 p (1..10).to_a.my_drop_while { |x| x < 3 }
 
+puts "\nManual Test of #my_each_cons"
+(1..10).to_a.my_each_cons(3) { |x| p x  }
+(1..100).to_a.my_each_cons(30) { |x| p x  }
 
 
 

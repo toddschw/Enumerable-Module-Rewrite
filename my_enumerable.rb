@@ -246,8 +246,35 @@ module MyEnumerable
     remaining_elements = last_index - counter + 1
     slice(counter,remaining_elements)
   end
+
+  # each_cons
+  # ********************************************************
+  # call it 1 way
+  # Way #1 [1,2,3,4,5].my_each_cons(n) { |x| x < 3 }
+
+  def my_each_cons(n, &block)
+    # initialize an empty final array
+    # this array will be iterated through in last step
+    final_array = []
+
+    # the method returns a number of sub_arrays
+    # that are consecutive.
+    # this variable holds how many there will be
+    how_many_sub_arrays = size - n + 1
+
+    how_many_sub_arrays.times do |i| 
+      final_array.push slice(i,n)
+    end
+
+    final_array.each do |a|
+      block.call a
+    end
+  end
+
 end
 
 Array.include MyEnumerable
+
+
 
 
