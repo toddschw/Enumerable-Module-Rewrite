@@ -211,6 +211,21 @@ module MyEnumerable
     nil
   end
 
+  # drop
+  # ********************************************************
+  # call it 1 way
+  # Way #1 [1,2,3,4,5].my_drop(n)
+
+  def my_drop(cutoff)
+    result = []
+    i = 0
+    each do | value |
+      result.push value  if i >= cutoff
+      i += 1
+    end
+    result
+  end
+
 end
 
 

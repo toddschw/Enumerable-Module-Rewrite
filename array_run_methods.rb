@@ -40,5 +40,13 @@ puts "\nManual Test of #my_detect"
 p [1,2,3,4,5].my_detect { |x| x % 9 == 0 }
 p (1..100).to_a.my_detect { |i| i % 5 == 0 and i % 7 == 0 }
 
+puts "\nManual Test of #my_drop"
+p (1..10).to_a.my_drop(0)
+p (1..10).to_a.my_drop(1)
+p (1..10).to_a.my_drop(10)
+p (1..10).to_a.my_drop(9)
+
+
+
 
 
