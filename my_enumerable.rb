@@ -96,7 +96,7 @@ module MyEnumerable
   end
 
 
-  # select
+  # select, find_all
   # ********************************************************
   # call it 3 ways
   # Way #1 [1,2,3,4,5].my_select(:even?)
@@ -141,7 +141,7 @@ module MyEnumerable
   # call it 1 way
   # Way #1 [1,2,3,4,5].my_all { |x| x > 3 }
 
-  def my_all(&block)
+  def my_all?(&block)
     result = 0
     self.each do |value|
       result += 1 if block.call(value)
@@ -156,7 +156,7 @@ module MyEnumerable
   # call it 1 way
   # Way #1 [1,2,3,4,5].my_any { |x| x > 3 }
 
-  def my_any(&block)
+  def my_any?(&block)
     result = 0
     self.each do |value|
       result += 1 if block.call(value)
