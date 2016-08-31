@@ -56,9 +56,11 @@ puts "\nManual Test of #my_each_cons"
 puts "\nManual Test of #my_each_slice"
 p [1,2,3,4,5,6,7,8,9,10].to_a.my_each_slice(4) { |x| p x }
 
-puts "\n Manual Test of #my_each_with_index"
+puts "\nManual Test of #my_each_with_index"
 hash = Hash.new
 %w(cat dog fish).my_each_with_index { |a,b| hash[b] = a }
 p hash
 
+puts "\n Manual Test of #my_each_with_object"
+p (1..10).my_each_with_object([]) { |i, a| a << i*2 }
 

@@ -296,15 +296,20 @@ module MyEnumerable
     end
   end
 
+  # #each_with_object
+  # ********************************************************
+  # [1,2,3,4,5,6,7,8,9,10].my_each_with_object(obj) { |i, a | a << i *2 }
+  def my_each_with_object(obj, &block)
+    each do |item|
+      block.call item,obj
+    end
+    obj
+  end
+
 end
 
 Array.include MyEnumerable
 Range.include MyEnumerable
-
-hash = Hash.new
-%w(cat dog fish).my_each_with_index { |a,b| hash[b] = a }
-p hash
-
 
 
 
