@@ -4,7 +4,8 @@
 # or at least a bunch of its methods
 # as a coding exercise.
 # The methods are meant to be mixed into the Array class
-# and may not work for other enumerable objects - ie Hashes or Ranges
+# and may not work if mixed into other enumerable classes
+# - ie Hashes or Ranges
 
 # Inspired by this post:
 # https://blog.codeship.com/the-enumerable-module/
@@ -73,7 +74,7 @@ module MyEnumerable
 
     # loop through array & call the proc on each element
     result = []
-    self.each do |element|
+    each do |element|
       result.push block.call(element)
     end
     result
@@ -284,14 +285,25 @@ module MyEnumerable
     nil
   end
 
+  # #each_with_index
+  # ********************************************************
+  # [1,2,3,4,5,6,7,8,9,10].my_each_with_index { |o| p o }
+  def my_each_with_index(&block)
+    i = 0
+    each do |item|
+      block.call item,i
+      i += 1
+    end
+  end
+
 end
 
 Array.include MyEnumerable
 Range.include MyEnumerable
 
-
-p [1,2,3,4,5,6,7,8,9,10].my_each_slice(4) { |x| p x }
-
+hash = Hash.new
+%w(cat dog fish).my_each_with_index { |a,b| hash[b] = a }
+p hash
 
 
 

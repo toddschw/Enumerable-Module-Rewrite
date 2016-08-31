@@ -51,11 +51,14 @@ puts "\nManual Test of #my_drop_while"
 p (1..10).to_a.my_drop_while { |x| x < 3 }
 
 puts "\nManual Test of #my_each_cons"
-(1..10).my_each_cons(3) { |x| p x  }
+(1..10).to_a.my_each_cons(3) { |x| p x  }
 
 puts "\nManual Test of #my_each_slice"
-p [1,2,3,4,5,6,7,8,9,10].my_each_slice(4) { |x| p x }
+p [1,2,3,4,5,6,7,8,9,10].to_a.my_each_slice(4) { |x| p x }
 
-
+puts "\n Manual Test of #my_each_with_index"
+hash = Hash.new
+%w(cat dog fish).my_each_with_index { |a,b| hash[b] = a }
+p hash
 
 
