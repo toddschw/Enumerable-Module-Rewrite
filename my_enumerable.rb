@@ -2,7 +2,10 @@
 
 # Recreate the Enumerable Module
 # or at least a bunch of its methods
-# as a coding exercise
+# as a coding exercise.
+# The methods are meant to be mixed into the Array class
+# and may not work for other enumerable objects - ie Hashes or Ranges
+
 # Inspired by this post:
 # https://blog.codeship.com/the-enumerable-module/
 
@@ -253,27 +256,42 @@ module MyEnumerable
   # Way #1 [1,2,3,4,5].my_each_cons(n) { |x| x < 3 }
 
   def my_each_cons(n, &block)
-    # initialize an empty final array
-    # this array will be iterated through in last step
+    # call the block this many times
+    iters = size - n + 1
+
+    iters.times do |i|
+      block.call slice(i,n)
+    end
+
+    nil
+  end
+
+
+  # each_slice
+  # ********************************************************
+  # [1,2,3,4,5,6,7,8,9,10].my_each_slice(2) { |o| p o }
+  def my_each_slice(n, &block)
+    if size % n == 0
+      iters = size / n
+    else
+      iters = size / n  + 1
+    end
+
     final_array = []
-
-    # the method returns a number of sub_arrays
-    # that are consecutive.
-    # this variable holds how many there will be
-    how_many_sub_arrays = size - n + 1
-
-    how_many_sub_arrays.times do |i| 
-      final_array.push slice(i,n)
+    iters.times do |i|
+      block.call slice(i*n,n)
     end
-
-    final_array.each do |a|
-      block.call a
-    end
+    nil
   end
 
 end
 
 Array.include MyEnumerable
+Range.include MyEnumerable
+
+
+p [1,2,3,4,5,6,7,8,9,10].my_each_slice(4) { |x| p x }
+
 
 
 

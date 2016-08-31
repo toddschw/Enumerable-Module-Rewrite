@@ -2,6 +2,7 @@
 require_relative 'my_enumerable'
 
 Array.include MyEnumerable
+Range.include MyEnumerable
 
 puts "\nManual Test of #my_map"
 p [1,2,3].my_map { |x| x * 50 }
@@ -50,8 +51,10 @@ puts "\nManual Test of #my_drop_while"
 p (1..10).to_a.my_drop_while { |x| x < 3 }
 
 puts "\nManual Test of #my_each_cons"
-(1..10).to_a.my_each_cons(3) { |x| p x  }
-(1..100).to_a.my_each_cons(30) { |x| p x  }
+(1..10).my_each_cons(3) { |x| p x  }
+
+puts "\nManual Test of #my_each_slice"
+p [1,2,3,4,5,6,7,8,9,10].my_each_slice(4) { |x| p x }
 
 
 
