@@ -306,10 +306,30 @@ module MyEnumerable
     obj
   end
 
+  # #my_find_index
+  # ********************************************************
+  # [1,2,3,4,5,6,7,8,9,10].my_find_index(7)
+  # [1,2,3,4,5,6,7,8,9,10].my_find_index { |i | i % 5 == 0 }
+
+  def my_find_index(value=nil, &block)
+    result = index(value) if value
+    if block_given?
+      my_each_with_index do |obj, index|
+        result = index if block.call(obj)
+        break if result
+      end
+    end
+    result
+  end
+
 end
 
 Array.include MyEnumerable
 Range.include MyEnumerable
 
+p (1..10).to_a.my_find_index  { |i| i % 5 == 0 and i % 7 == 0 }  #=> nil
+p (1..100).to_a.my_find_index { |i| i % 5 == 0 and i % 7 == 0 }  #=> 34
+p (1..100).to_a.my_find_index(50)                                #=> 49
 
+# p %w(dog cat dog).to_a.my_find_index { |x| x == "dog" }
 

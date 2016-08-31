@@ -63,4 +63,9 @@ p hash
 
 puts "\n Manual Test of #my_each_with_object"
 p (1..10).my_each_with_object([]) { |i, a| a << i*2 }
+p (1..10).my_each_with_object("Even Numbers are: ") { |i, a| a << ( (i*2).to_s << " ") }.strip
 
+puts "\n Manual Test of #my_find_index"
+p (1..10).to_a.my_find_index  { |i| i % 5 == 0 and i % 7 == 0 }  #=> nil
+p (1..100).to_a.my_find_index { |i| i % 5 == 0 and i % 7 == 0 }  #=> 34
+p (1..100).to_a.my_find_index(50)                                #=> 49
